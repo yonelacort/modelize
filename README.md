@@ -42,7 +42,7 @@ Modelize.create(source, options)
  have a look to the examples to see how it works in each case supported.
 
 
-### Instanciate object from JSON string
+### Instantiate from JSON represented as string
 ```ruby
 source = "{
   \"root\" : {
@@ -63,7 +63,7 @@ instance.root.object_key.sub_key
 #=> 123
 ```
 
-### Instanciate object from Hash
+### Instantiate from Hash
 
 ```ruby
 source = {
@@ -96,7 +96,7 @@ instance.root.object_key.sub_key
 #=> 123
 ```
 
-### Instanciate object from XML file
+### Instantiate from XML file
 
 Having the following XML file whose path is ```"path/to/file"```
 ```xml
@@ -123,7 +123,7 @@ instance.root.object_key.sub_key
 ```
 Note, integers and floats will be returned in string format until fix.
 
-### Instanciate object from JSON file
+### Instantiate from JSON file
 
 Having a JSON file whose path is ```"path/to/file"```
 ```json
@@ -148,7 +148,7 @@ instance.root.object_key.sub_key
 #=> 123
 ```
 
-### Instanciate object from CSV file
+### Instanciate from CSV file
 
 Having this CSV file whose path is ```"path/to/file"```
 ```csv
