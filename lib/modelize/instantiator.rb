@@ -1,11 +1,15 @@
 # encoding: UTF-8
 
+require "virtus"
+
 module Modelize
   module Instantiator
     module_function
 
-    def magic(hash_data)
-      klass = Class.new(Model)
+    def magic(hash_data, klass = nil)
+      klass = Class.new unless klass
+      klass.class_eval("include Virtus.model")
+
       if hash_data.class == Array
         set_klass_attributes(klass, hash_data.first)
         hash_data.collect { |element| set_instance_values(klass, element) }.compact

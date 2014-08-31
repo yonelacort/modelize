@@ -153,4 +153,37 @@ describe Modelize::God do
       # end
     end
   end
+
+  describe "custom root class" do
+    let(:data) do
+      {
+        "root" => {
+          "key1" => "value1",
+          "key2" => "value2",
+          "key_array" => ["1st", 2, 3],
+          "key_object" => {
+            "sub_key" => 123
+          }
+        }
+      }
+    end
+
+    class Root
+      def first_key_array
+        root.key_array.first
+      end
+
+      def sub_key
+        root.key_object.sub_key
+      end
+    end
+
+    let(:instance) { described_class.create(data, format: :hash, class: Root) }
+
+
+    it "execute methods defined" do
+      expect(instance.sub_key).to eq(123)
+      expect(instance.first_key_array).to eq("1st")
+    end
+  end
 end

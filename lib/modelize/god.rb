@@ -6,7 +6,7 @@ module Modelize
 
     def create(source, options = {})
       hash_data = Transformer.new(source, options).to_hash
-      Instantiator.magic(hash_data)
+      Instantiator.magic(hash_data, options[:class])
     end
   end
 end
