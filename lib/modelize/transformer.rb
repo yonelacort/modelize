@@ -13,27 +13,30 @@ module Modelize
 
     def to_hash
       return @data if is_hash?
-      @data = data_to_json if is_csv?
-      @data = JSON.parse(@data) if is_json_string?
+      @data = data_to_hash
       # raise UnsupportedFormat if @data.nil?
       @data
     end
 
     private
 
-    def data_to_json
+    def data_to_hash
       if is_xml?
-        json_from_xml
+        hash_from_xml
       elsif is_csv?
-        json_from_csv_file
+        hash_from_csv_file
+      elsif is_json? && !@file
+        JSON.parse(@data)
+      elsif is_json? && @file
+        hash_from_json_file
       end
     end
 
-    def json_from_xml
+    def hash_from_xml
       Hash.from_xml(@obect).to_json
     end
 
-    def json_from_csv_file
+    def hash_from_csv_file
       data = []
       CSV.foreach(@data, headers: true, col_sep: @separator) do |row|
         data << row.to_hash
@@ -41,8 +44,14 @@ module Modelize
       data
     end
 
-    def is_json_string?
-      @format == :json_string
+    def hash_from_json_file
+      File.open(@data, "r" ) do |file|
+        JSON.load(file)
+      end
+    end
+
+    def is_json?
+      @format == :json
     end
 
     def is_hash?
