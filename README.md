@@ -1,11 +1,8 @@
 # Modelize  [![wercker status](https://app.wercker.com/status/b2028c39b7ff2ea261857eac4db73af3/s "wercker status")](https://app.wercker.com/project/bykey/b2028c39b7ff2ea261857eac4db73af3)[![Code Climate](https://codeclimate.com/github/yonelacort/modelize/badges/gpa.svg)](https://codeclimate.com/github/yonelacort/modelize)
 
-### Still in development!
-
-Ruby transformer from JSON (as a string), XML, Hash and CSV to an instance class with its attributes.
-
-It transforms from objects or files in JSON, XML and CSV.
-With meta-programming techniques, classes are created in runtime with their corresponding attributes and respecting object hierarchies, and then instanciated.
+Ruby gem that transforms from **JSON**, **XML**, **Hash** and **CSV** to an instance class with its attributes.
+Classes are created in runtime with their corresponding attributes, as well as the attributes values are set.
+It also respects the object hierarchy and generates the nested instance classes.
 
 Handy tool to parse and manipulate HTTP responses, files and objects in the format listed above.
 
@@ -169,7 +166,7 @@ instance.last.height
 
 ### Using a custom class as instance root
 
-To give also space to some customization you can define your methods the class you pass.
+To give also space to some customization you can define your methods in the **custom** class that you pass.
 
 Given the following source:
 ```ruby
@@ -192,7 +189,7 @@ end
 
 Now, by making use of this class you can manipulate inner class instances in a predefined way.
 ```ruby
-place = Modelize.create(source, format: :json, class: Place)
+place = Modelize.create(source, format: :hash, class: Place)
 place.latlng
 #=> "31.1234,-0.3562"
 ```
