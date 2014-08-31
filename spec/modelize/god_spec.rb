@@ -12,7 +12,7 @@ describe Modelize::God do
         }
       }
     end
-    let(:instance) { described_class.new(data, format: :hash).create }
+    let(:instance) { described_class.create(data, format: :hash) }
 
     it "reprensents the root as variable" do
       expect(instance.root).to_not be_nil
@@ -46,7 +46,7 @@ describe Modelize::God do
         }
       }"
     end
-    let(:instance) { described_class.new(data, format: :json).create }
+    let(:instance) { described_class.create(data, format: :json) }
 
     it "reprensents the root as variable" do
       expect(instance.root).to_not be_nil
@@ -68,7 +68,7 @@ describe Modelize::God do
   end
 
   describe "json file" do
-    let(:instance) { described_class.new("spec/fixtures/test.json", format: :json, file: true).create }
+    let(:instance) { described_class.create("spec/fixtures/test.json", format: :json, file: true) }
 
     it "reprensents the root as variable" do
       expect(instance.root).to_not be_nil
@@ -89,8 +89,30 @@ describe Modelize::God do
     end
   end
 
+  describe "xml file" do
+    let(:instance) { described_class.create("spec/fixtures/test.xml", format: :xml, file: true) }
+
+    it "reprensents the root as variable" do
+      expect(instance.root).to_not be_nil
+    end
+
+    it "nested values are created as attributes by the key name" do
+      expect(instance.root.key1).to eq("value1")
+      expect(instance.root.key2).to eq("value2")
+    end
+
+    it "nested elements whose value is an array" do
+      expect(instance.root.key_array).to be_kind_of(Array)
+      expect(instance.root.key_array.first).to eq("1")
+    end
+
+    it "whatever nested values are created as attributes by the parent key name" do
+      expect(instance.root.key_object.sub_key1).to eq("123")
+    end
+  end
+
   describe "csv file" do
-    let(:instance) { described_class.new("spec/fixtures/test.csv", format: :csv, file: true).create }
+    let(:instance) { described_class.create("spec/fixtures/test.csv", format: :csv, file: true) }
 
     it "returns an array" do
       expect(instance).to be_kind_of(Array)

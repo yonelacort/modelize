@@ -1,5 +1,3 @@
-require "virtus"
-
 module Modelize
   module Instantiator
     module_function

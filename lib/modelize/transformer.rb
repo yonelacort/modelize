@@ -1,68 +1,69 @@
 require "json"
-# require "xml"
+require "nori"
+require "nokogiri"
 require "csv"
 
 module Modelize
   class Transformer
-    def initialize(data, options = {})
-      @data   = data
+    def initialize(source, options = {})
+      @source = source
       @format = options[:format]
       @file   = options[:file]
       @separator = options[:separator] || ","
     end
 
     def to_hash
-      return @data if is_hash?
-      @data = data_to_hash
-      # raise UnsupportedFormat if @data.nil?
-      @data
+      return @source if is_hash?
+      data_to_hash
     end
 
     private
 
     def data_to_hash
-      if is_xml?
-        hash_from_xml
-      elsif is_csv?
+      if is_xml_file?
+        hash_from_xml_file
+      elsif is_csv_file?
         hash_from_csv_file
-      elsif is_json? && !@file
-        JSON.parse(@data)
-      elsif is_json? && @file
+      elsif is_json_file?
         hash_from_json_file
+      elsif is_json?
+        JSON.parse(@source)
       end
     end
 
-    def hash_from_xml
-      Hash.from_xml(@obect).to_json
+    def hash_from_xml_file
+      Nori.new.parse(File.read(@source))
     end
 
     def hash_from_csv_file
       data = []
-      CSV.foreach(@data, headers: true, col_sep: @separator) do |row|
+      CSV.foreach(@source, headers: true, col_sep: @separator) do |row|
         data << row.to_hash
       end
       data
     end
 
     def hash_from_json_file
-      File.open(@data, "r" ) do |file|
-        JSON.load(file)
-      end
-    end
-
-    def is_json?
-      @format == :json
+      JSON.parse(File.read(@source))
     end
 
     def is_hash?
       @format == :hash
     end
 
-    def is_csv?
+    def is_json?
+      @format == :json
+    end
+
+    def is_json_file?
+      @file && is_json?
+    end
+
+    def is_csv_file?
       @file && @format == :csv
     end
 
-    def is_xml?
+    def is_xml_file?
       @file && @format == :xml
     end
   end

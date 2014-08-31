@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+  <key1>value1</key1>
+  <key2>value2</key2>
+  <key_array>1</key_array>
+  <key_array>2</key_array>
+  <key_array>3</key_array>
+  <key_object>
+    <sub_key1>123</sub_key1>
+  </key_object>
+</root>
