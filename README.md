@@ -1,6 +1,7 @@
 # Modelize  [![wercker status](https://app.wercker.com/status/b2028c39b7ff2ea261857eac4db73af3/s "wercker status")](https://app.wercker.com/project/bykey/b2028c39b7ff2ea261857eac4db73af3)[![Code Climate](https://codeclimate.com/github/yonelacort/modelize/badges/gpa.svg)](https://codeclimate.com/github/yonelacort/modelize)
 
 Ruby gem that transforms from **JSON**, **XML**, **Hash** and **CSV** to an instance class with its attributes.
+
 Classes are created in runtime with their corresponding attributes, as well as the attributes values are set.
 It also respects the object hierarchy and generates the nested instance classes.
 
