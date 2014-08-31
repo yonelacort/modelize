@@ -37,7 +37,7 @@ source = "{
   }
 }"
 
-instance = Modelize::God.create(source, format: :json)
+instance = Modelize.create(source, format: :json)
 instance.root.key
 #=> "value"
 instance.root.array_key
@@ -70,7 +70,7 @@ source = {
 #   }
 # }
 
-instance = Modelize::God.create(source, format: :hash)
+instance = Modelize.create(source, format: :hash)
 instance.root.key
 #=> "value"
 instance.root.array_key
@@ -96,7 +96,7 @@ Having the following XML file whose path is ```"path/to/file"```
 ```
 
 ```ruby
-Modelize::God.create("path/to/file", format: :xml, file: true)
+Modelize.create("path/to/file", format: :xml, file: true)
 instance.root.key
 #=> "value"
 instance.root.array_key
@@ -122,7 +122,7 @@ Having a JSON file whose path is ```"path/to/file"```
 ```
 
 ```ruby
-Modelize::God.create("path/to/file", format: :json, file: true)
+Modelize.create("path/to/file", format: :json, file: true)
 instance.root.key
 #=> "value"
 instance.root.array_key
@@ -141,7 +141,7 @@ id;name;phone;city;height
 ```
 
 ```ruby
-Modelize::God.create("path/to/file", format: :csv, file: true, separator: ";")
+Modelize.create("path/to/file", format: :csv, file: true, separator: ";")
 instance.first.name
 #=> "Tom"
 instance.last.height

@@ -1,4 +1,4 @@
-describe Modelize::God do
+describe Modelize do
   describe "hash" do
     let(:data) do
       {
