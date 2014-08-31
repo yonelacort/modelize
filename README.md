@@ -4,8 +4,8 @@
 
 Ruby transformer from JSON (as a string), XML, Hash and CSV to an instance class with its attributes.
 
-It transform from objects or files in JSON, XML and CSV. With meta-programming techniques,
-the classes are created and instanciated, with their corresponding attributes and respecting object hierarchies.
+It transforms from objects or files in JSON, XML and CSV.
+With meta-programming techniques, classes are created in runtime with their corresponding attributes and respecting object hierarchies, and then instanciated.
 
 Handy tool to parse and manipulate HTTP responses, files and objects in the format listed above.
 
@@ -24,6 +24,25 @@ Or install it yourself as:
     $ gem install modelize
 
 ## Usage
+
+To create the class dynamically and get it instanciated:
+
+```ruby
+Modelize.create(source, options)
+```
+
+* **source**: Object or file's path.
+* **options**:
+  * **format** (required): (:xml|:json|:csv|:hash)
+  * **file** (false by default):
+    * **true**:  When in the source is the path for the file containing the data.
+    * **false**: When the object is directly passed in the source param.
+  * **separator**: Only for CSV! Points the character used as column separator in the CSV file.
+  * **class** (by default nil): Custom class that can be passed to be used as instance class root.
+                                Useful to have predefined functions and validations.
+
+ have a look to the examples to see how it works in each case supported.
+
 
 ### Instanciate object from JSON string
 ```ruby
@@ -146,6 +165,36 @@ instance.first.name
 #=> "Tom"
 instance.last.height
 #=> "1.98"
+```
+
+### Using a custom class as instance root
+
+To give also space to some customization you can define your methods the class you pass.
+
+Given the following source:
+```ruby
+source = {
+  coordinates: {
+    lat: 31.1234,
+    lng: -0.3562
+  }
+}
+```
+
+Lets pass the class ```Place``` to Modelize
+```ruby
+class Place
+  def latlng
+    "#{coordinates.lat},#{coordinates.lng}"
+  end
+end
+```
+
+Now, by making use of this class you can manipulate inner class instances in a predefined way.
+```ruby
+place = Modelize.create(source, format: :json, class: Place)
+place.latlng
+#=> "31.1234,-0.3562"
 ```
 
 ## Contributing
