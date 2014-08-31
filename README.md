@@ -46,7 +46,7 @@ instance.root.object_key.sub_key
 #=> 123
 ```
 
-### Instanciate object from Hash string
+### Instanciate object from Hash
 
 ```ruby
 source = {
@@ -81,7 +81,7 @@ instance.root.object_key.sub_key
 
 ### Instanciate object from XML file
 
-Having a XML file whose path is     $ "path/to/file"
+Having the following XML file whose path is ```console "path/to/file" ```
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <root>
@@ -108,12 +108,11 @@ Note, integers and floats will be returned in string format until fix.
 
 ### Instanciate object from JSON file
 
-Having a JSON file whose path is     $ "path/to/file"
-
+Having a JSON file whose path is ```console "path/to/file" ```
 ```json
 {
   "root" : {
-    "key" : "value1",
+    "key" : "value",
     "array_key" : [1, 2, 3],
     "object_key" : {
       "sub_key" : 123
@@ -134,8 +133,7 @@ instance.root.object_key.sub_key
 
 ### Instanciate object from CSV file
 
-Having a CSV file whose path is     $ "path/to/file"
-
+Having this CSV file whose path is ```console "path/to/file" ```
 ```csv
 id;name;phone;city;height
 1;Tom;123;Valencia;1.78
