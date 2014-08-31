@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require "json"
 require "nori"
 require "nokogiri"
@@ -13,8 +15,12 @@ module Modelize
     end
 
     def to_hash
-      return @source if is_hash?
-      data_to_hash
+      begin
+        return @source if is_hash?
+        data_to_hash
+      rescue
+        raise MalformedFileError
+      end
     end
 
     private

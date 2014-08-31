@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module Modelize
   module Instantiator
     module_function

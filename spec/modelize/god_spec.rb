@@ -87,6 +87,14 @@ describe Modelize::God do
     it "whatever nested values are created as attributes by the parent key name" do
       expect(instance.root.key_object.sub_key1).to eq(123)
     end
+
+    context "when is malformed" do
+      let(:instance) { described_class.create("spec/fixtures/malformed.json", format: :json, file: true) }
+
+      it "raises MalformedFileError" do
+        expect{ instance }.to raise_error(Modelize::MalformedFileError)
+      end
+    end
   end
 
   describe "xml file" do
@@ -109,6 +117,14 @@ describe Modelize::God do
     it "whatever nested values are created as attributes by the parent key name" do
       expect(instance.root.key_object.sub_key1).to eq("123")
     end
+
+    context "when is malformed" do
+      let(:instance) { described_class.create("spec/fixtures/malformed.xml", format: :xml, file: true) }
+      pending
+      # it "raises MalformedFileError" do
+      #   expect{ instance }.to raise_error(Modelize::MalformedFileError)
+      # end
+    end
   end
 
   describe "csv file" do
@@ -127,6 +143,14 @@ describe Modelize::God do
     it "attributes for the first element are properly set" do
       expect(instance.last.height).to eq("1.98")
       expect(instance.last.name).to eq("paul")
+    end
+
+    context "when is malformed" do
+      let(:instance) { described_class.create("spec/fixtures/malformed.csv", format: :csv, file: true) }
+      pending
+      # it "raises MalformedFileError" do
+      #   expect{ instance }.to raise_error(Modelize::MalformedFileError)
+      # end
     end
   end
 end
