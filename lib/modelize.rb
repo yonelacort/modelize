@@ -1,5 +1,5 @@
 require "modelize/version"
-
-module Modelize
-  # Your code goes here...
-end
+require "modelize/god"
+require "modelize/transformer"
+require "modelize/instantiator"
+require "modelize/model"
