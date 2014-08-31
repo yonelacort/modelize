@@ -81,7 +81,7 @@ instance.root.object_key.sub_key
 
 ### Instanciate object from XML file
 
-Having the following XML file whose path is ```console "path/to/file" ```
+Having the following XML file whose path is ```"path/to/file"```
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <root>
@@ -108,7 +108,7 @@ Note, integers and floats will be returned in string format until fix.
 
 ### Instanciate object from JSON file
 
-Having a JSON file whose path is ```console "path/to/file" ```
+Having a JSON file whose path is ```"path/to/file"```
 ```json
 {
   "root" : {
@@ -133,7 +133,7 @@ instance.root.object_key.sub_key
 
 ### Instanciate object from CSV file
 
-Having this CSV file whose path is ```console "path/to/file" ```
+Having this CSV file whose path is ```"path/to/file"```
 ```csv
 id;name;phone;city;height
 1;Tom;123;Valencia;1.78
